@@ -6,14 +6,14 @@ function Applications() {
     const [applications, setApplications] = useState([]);
 
     useEffect(() => {
-        fetchApplications();
+        await fetchApplications();
     }, []);
 
-    const fetchApplications = async () => {
+    const await fetchApplications = async () => {
 
         try {
 
-            fetch(`${import.meta.env.VITE_API_URL}/api/applications`)
+            await fetch(`${import.meta.env.VITE_API_URL}/api/applications`)
 
             const data = await response.json();
 

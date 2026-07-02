@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./Jobs.css";
 
 function Jobs() {
-
     const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
@@ -10,25 +9,24 @@ function Jobs() {
     }, []);
 
     const fetchJobs = async () => {
-
         try {
-
-            fetch(`${import.meta.env.VITE_API_URL}/api/jobs`)
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/api/jobs`
+            );
 
             const data = await response.json();
+
+            console.log(data);
 
             if (data.success) {
                 setJobs(data.jobs);
             }
-
         } catch (error) {
             console.log(error);
         }
-
     };
 
     const applyJob = async (jobId) => {
-
         const user = JSON.parse(localStorage.getItem("user"));
 
         if (!user) {
@@ -37,49 +35,38 @@ function Jobs() {
         }
 
         try {
-
-            const response = fetch(`${import.meta.env.VITE_API_URL}/api/applications`, {
-
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    userId: user._id,
-                    jobId: jobId
-                })
-
-            });
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/api/applications`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        userId: user._id,
+                        jobId,
+                    }),
+                }
+            );
 
             const data = await response.json();
-
             alert(data.message);
-
         } catch (error) {
-
             console.log(error);
-
             alert("Unable to apply.");
-
         }
-
     };
 
     return (
-
         <div className="jobs-container">
-
             <h1>Available Jobs</h1>
 
             <div className="jobs-grid">
-
-                {
+                {jobs.length === 0 ? (
+                    <h3>No Jobs Available</h3>
+                ) : (
                     jobs.map((job) => (
-
                         <div className="job-card" key={job._id}>
-
                             <h2>{job.title}</h2>
 
                             <p><strong>Company:</strong> {job.company}</p>
@@ -92,23 +79,15 @@ function Jobs() {
 
                             <p>{job.description}</p>
 
-                            <button
-                                onClick={() => applyJob(job._id)}
-                            >
+                            <button onClick={() => applyJob(job._id)}>
                                 Apply
                             </button>
-
                         </div>
-
                     ))
-                }
-
+                )}
             </div>
-
         </div>
-
     );
-
 }
 
 export default Jobs;
