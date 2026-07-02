@@ -2,77 +2,61 @@ import { useEffect, useState } from "react";
 import "./Applications.css";
 
 function Applications() {
-
     const [applications, setApplications] = useState([]);
 
     useEffect(() => {
-        await fetchApplications();
+        fetchApplications();
     }, []);
 
-    const await fetchApplications = async () => {
-
+    const fetchApplications = async () => {
         try {
-
-            await fetch(`${import.meta.env.VITE_API_URL}/api/applications`)
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/api/applications`
+            );
 
             const data = await response.json();
+
+            console.log(data);
 
             if (data.success) {
                 setApplications(data.applications);
             }
-
         } catch (error) {
             console.log(error);
         }
-
     };
 
     return (
-
         <div className="applications">
-
             <h1>Applications</h1>
 
             <table>
-
                 <thead>
-
                     <tr>
-
                         <th>User ID</th>
                         <th>Job ID</th>
                         <th>Status</th>
-
                     </tr>
-
                 </thead>
 
                 <tbody>
-
-                    {
+                    {applications.length === 0 ? (
+                        <tr>
+                            <td colSpan="3">No Applications Found</td>
+                        </tr>
+                    ) : (
                         applications.map((app) => (
-
                             <tr key={app._id}>
-
                                 <td>{app.userId}</td>
-
                                 <td>{app.jobId}</td>
-
                                 <td>{app.status}</td>
-
                             </tr>
-
                         ))
-                    }
-
+                    )}
                 </tbody>
-
             </table>
-
         </div>
-
     );
-
 }
 
 export default Applications;
