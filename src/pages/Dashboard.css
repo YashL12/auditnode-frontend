@@ -1,0 +1,21 @@
+.dashboard {
+    width: 80%;
+    margin: 40px auto;
+}
+
+.dashboard h1 {
+    color: #2563eb;
+    margin-bottom: 30px;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+}
+
+.dashboard-card p {
+    margin: 15px 0;
+    font-size: 18px;
+}

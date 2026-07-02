@@ -1,0 +1,42 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2563eb;
+    color: white;
+    padding: 15px 40px;
+}
+
+.navbar h2 {
+    margin: 0;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.links a:hover {
+    color: #dbeafe;
+}
+
+.links button {
+    padding: 8px 15px;
+    border: none;
+    background-color: white;
+    color: #2563eb;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.links button:hover {
+    background-color: #dbeafe;
+}
