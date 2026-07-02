@@ -13,7 +13,7 @@ function Jobs() {
 
         try {
 
-            const response = await fetch("http://localhost:5000/api/jobs");
+            fetch(`${import.meta.env.VITE_API_URL}/api/jobs`)
 
             const data = await response.json();
 
@@ -38,7 +38,7 @@ function Jobs() {
 
         try {
 
-            const response = await fetch("http://localhost:5000/api/applications", {
+            const response = fetch(`${import.meta.env.VITE_API_URL}/api/applications`, {
 
                 method: "POST",
 

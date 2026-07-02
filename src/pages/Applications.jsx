@@ -13,7 +13,7 @@ function Applications() {
 
         try {
 
-            const response = await fetch("http://localhost:5000/api/applications");
+            fetch(`${import.meta.env.VITE_API_URL}/api/applications`)
 
             const data = await response.json();
 
